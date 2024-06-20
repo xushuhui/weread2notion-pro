@@ -45,7 +45,7 @@ def insert_book_to_notion(books, index, bookId):
     """插入Book到Notion"""
     book = {}
     if bookId in books:
-        print("book",books[bookId])
+        print("book",books.get(bookId))
     if bookId in archive_dict:
         book["书架分类"] = archive_dict.get(bookId)
     if bookId in notion_books:
@@ -76,7 +76,8 @@ def insert_book_to_notion(books, index, bookId):
     elif status == "已读":
         book["我的评分"] = "未评分"
     date = None
-
+    if book.get("readUpdateTime"):
+        date = book.get("readUpdateTime")
     if book.get("finishedDate"):
         date = book.get("finishedDate")
     elif book.get("lastReadingDate"):
