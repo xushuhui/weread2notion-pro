@@ -44,6 +44,8 @@ def get_douban_url(isbn):
 def insert_book_to_notion(books, index, bookId):
     """插入Book到Notion"""
     book = {}
+    if bookId in books:
+        print("book",books[bookId])
     if bookId in archive_dict:
         book["书架分类"] = archive_dict.get(bookId)
     if bookId in notion_books:
@@ -74,8 +76,7 @@ def insert_book_to_notion(books, index, bookId):
     elif status == "已读":
         book["我的评分"] = "未评分"
     date = None
-    if book.get("readUpdateTime"):
-        date = book.get("readUpdateTime")
+
     if book.get("finishedDate"):
         date = book.get("finishedDate")
     elif book.get("lastReadingDate"):
@@ -120,7 +121,7 @@ def insert_book_to_notion(books, index, bookId):
         )
 
     print(f"正在插入《{book.get('title')}》,一共{len(books)}本，当前是第{index+1}本。")
-    print(book)
+    
     parent = {"database_id": notion_helper.book_database_id, "type": "database_id"}
     result = None
     if bookId in notion_books:
