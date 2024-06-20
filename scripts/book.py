@@ -44,9 +44,10 @@ def get_douban_url(isbn):
 def insert_book_to_notion(books, index, bookId):
     """插入Book到Notion"""
     book = {}
-    if bookId in books:
-        founds = [b for b in books if b.get('bookId') == bookId]
-        print("book",founds)
+    print("book",books)
+
+        
+        
     if bookId in archive_dict:
         book["书架分类"] = archive_dict.get(bookId)
     if bookId in notion_books:
