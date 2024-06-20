@@ -74,6 +74,8 @@ def insert_book_to_notion(books, index, bookId):
     elif status == "已读":
         book["我的评分"] = "未评分"
     date = None
+    if book.get("readUpdateTime"):
+        date = book.get("readUpdateTime")
     if book.get("finishedDate"):
         date = book.get("finishedDate")
     elif book.get("lastReadingDate"):
