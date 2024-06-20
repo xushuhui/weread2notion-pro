@@ -45,7 +45,8 @@ def insert_book_to_notion(books, index, bookId):
     """插入Book到Notion"""
     book = {}
     if bookId in books:
-        print("book",books.get(bookId))
+        founds = [b for b in books if b.get('bookId') == bookId]
+        print("book",founds)
     if bookId in archive_dict:
         book["书架分类"] = archive_dict.get(bookId)
     if bookId in notion_books:
